@@ -1,0 +1,319 @@
+shinyServer(function(input, output) {
+  output$plot2d_1 <- renderPlot ({
+    #scale
+    if (input$scale == 1) {
+      scale_value <-TRUE
+    } else if (input$scale == 2) {
+      scale_value <-FALSE
+    } else {
+      scale_value <-FALSE
+    }
+    
+    #fancy
+    if (input$fancy == 1) {
+      fancy_value <-TRUE
+    } else if (input$fancy == 2) {
+      fancy_value <-FALSE
+    } else {
+      fancy_value <-FALSE
+    }
+    
+    #col
+    if (input$col == 0) {
+      col_value <-0
+    } else if (input$col == 1) {
+      col_value <-1
+    } else if (input$col == 2) {
+      col_value <-2
+    } else if (input$col == 3) {
+      col_value <-3
+    } else if (input$col == 4) {
+      col_value <-4
+    } else if (input$col == 5) {
+      col_value <-5
+    } else if (input$col == 6) {
+      col_value <-6
+    } else if (input$col == 7) {
+      col_value <-7
+    } else if (input$col == 8) {
+      col_value <-8
+    } else if (input$col == 9) {
+      col_value <-NULL
+    } else {
+      col_value <-NULL
+    }
+    
+    #radius
+    if (input$radius == 0.750) {
+      radius_value <-0.750
+    } else if (input$radius == 0.875) {
+      radius_value <-0.875
+    } else if (input$radius == 1) {
+      radius_value <-1
+    } else if (input$radius == 1.17) {
+      radius_value <-1.17
+    } else if (input$radius == 1.33) {
+      radius_value <-1.33
+    } else if (input$radius == 1.50) {
+      radius_value <-1.50
+    } else if (input$radius == 1.67) {
+      radius_value <-1.67
+    } else if (input$radius == 1.83) {
+      radius_value <-1.83
+    } else if (input$radius == 2.00) {
+      radius_value <-2.00
+    } else if (input$radius == 2.33) {
+      radius_value <-2.33
+    } else {
+      radius <-1
+    }
+    
+    #legend
+    if (input$legend == 0) {
+      legend_value <-"topleft"
+    } else if (input$legend == 1) {
+      legend_value <-"topright"
+    } else if (input$legend == 2) {
+      legend_value <-"top"
+    } else if (input$legend == 3) {
+      legend_value <-"bottomleft"
+    } else if (input$legend == 4) {
+      legend_value <-"bottomright"
+    } else if (input$legend == 5) {
+      legend_value <-"bottom"
+    } else if (input$legend == 6) {
+      legend_value <-NULL
+    } else {
+      legend_value <-"topleft"
+    }
+    
+    iris=data.frame("iris"= iris)
+    compiled_iris<-iris[1:4]
+    pca <-prcomp(compiled_iris, scale= scale_value)
+    
+    pca2d(pca,
+          group = iris[,5],
+          show.ellipses = TRUE,
+          ellipse.ci = input$ellipse_ci,
+          show.plane = TRUE,
+          fancy = fancy_value,
+          bg = input$bg,
+          col = col_value,
+          radius = radius_value,
+          legend = legend_value
+          )
+  })
+  
+  
+  
+  output$downloadPlot = downloadHandler(
+    filename = "pca.png",
+    content = function(file) {
+      png(file, width = 1000)
+      #scale
+      if (input$scale == 1) {
+        scale_value <-TRUE
+      } else if (input$scale == 2) {
+        scale_value <-FALSE
+      } else {
+        scale_value <-FALSE
+      }
+      
+      #fancy
+      if (input$fancy == 1) {
+        fancy_value <-TRUE
+      } else if (input$fancy == 2) {
+        fancy_value <-FALSE
+      } else {
+        fancy_value <-FALSE
+      }
+      
+      #col
+      if (input$col == 0) {
+        col_value <-0
+      } else if (input$col == 1) {
+        col_value <-1
+      } else if (input$col == 2) {
+        col_value <-2
+      } else if (input$col == 3) {
+        col_value <-3
+      } else if (input$col == 4) {
+        col_value <-4
+      } else if (input$col == 5) {
+        col_value <-5
+      } else if (input$col == 6) {
+        col_value <-6
+      } else if (input$col == 7) {
+        col_value <-7
+      } else if (input$col == 8) {
+        col_value <-8
+      } else if (input$col == 9) {
+        col_value <-NULL
+      } else {
+        col_value <-NULL
+      }
+      
+      #radius
+      if (input$radius == 0.750) {
+        radius_value <-0.750
+      } else if (input$radius == 0.875) {
+        radius_value <-0.875
+      } else if (input$radius == 1) {
+        radius_value <-1
+      } else if (input$radius == 1.17) {
+        radius_value <-1.17
+      } else if (input$radius == 1.33) {
+        radius_value <-1.33
+      } else if (input$radius == 1.50) {
+        radius_value <-1.50
+      } else if (input$radius == 1.67) {
+        radius_value <-1.67
+      } else if (input$radius == 1.83) {
+        radius_value <-1.83
+      } else if (input$radius == 2.00) {
+        radius_value <-2.00
+      } else if (input$radius == 2.33) {
+        radius_value <-2.33
+      } else {
+        radius <-1
+      }
+      
+      #legend
+      if (input$legend == 0) {
+        legend_value <-"topleft"
+      } else if (input$legend == 1) {
+        legend_value <-"topright"
+      } else if (input$legend == 2) {
+        legend_value <-"top"
+      } else if (input$legend == 3) {
+        legend_value <-"bottomleft"
+      } else if (input$legend == 4) {
+        legend_value <-"bottomright"
+      } else if (input$legend == 5) {
+        legend_value <-"bottom"
+      } else if (input$legend == 6) {
+        legend_value <-NULL
+      } else {
+        legend_value <-"topleft"
+      }
+      
+      iris=data.frame("iris"= iris)
+      compiled_iris<-iris[1:4]
+      pca <-prcomp(compiled_iris, scale= scale_value)
+      
+      pca2d(pca,
+            group = iris[,5],
+            show.ellipses = TRUE,
+            ellipse.ci = input$ellipse_ci,
+            show.plane = TRUE,
+            fancy = fancy_value,
+            bg = input$bg,
+            col = col_value,
+            radius = radius_value,
+            legend = legend_value
+      )
+      dev.off()
+    },
+    contentType = "image/png",
+  )
+    ############################################################
+    output$plot2d_2 <- renderPlot ({
+      #scale
+      if (input$scale_2 == 1) {
+        scale_value_2 <-TRUE
+      } else if (input$scale_2 == 2) {
+        scale_value_2 <-FALSE
+      } else {
+        scale_value_2 <-FALSE
+      }
+      #var.axes
+      if (input$var_axes == 1) {
+        var_axes_value <-TRUE
+      } else if (input$var_axes == 2) {
+        var_axes_value <-FALSE
+      } else {
+        var_axes_value <-FALSE
+      }
+      #varname.abbrev
+      if (input$varname_abbrev == 1) {
+        varname_abbrev_value <-TRUE
+      } else if (input$varname_abbrev == 2) {
+        varname_abbrev_value <-FALSE
+      } else {
+        varname_abbrev_value <-FALSE
+      }
+      
+      
+      compiled_iris2<-iris[,1:4]
+      compiled_iris2[1:50,] <- compiled_iris2[1:50,] + 1
+      compiled_iris2[51:100,] <- compiled_iris2[51:100,] + 2
+      compiled_iris2[101:150,] <- compiled_iris2[101:150,] + 3
+      compiled_iris2<- cbind(c(rep("setosa", 50),
+                               rep("versicolor", 50),
+                               rep("virginica", 50)),
+                             compiled_iris2)
+      colnames(compiled_iris2) <- c("Sepal.Length","Sepal.Width","Petal.Length","Petal.Width","Petal.Width")
+
+      pca2 <- prcomp(iris[,1:4], scale = scale_value_2)
+
+      ggbiplot(pcobj = pca2, choices = 1:2, obs.scale = 0.5, var.scale = 2,
+               groups = iris[, 5], ellipse = TRUE, ellipse.prob = input$ellipse_prob, alpha = input$alpha,
+               labels.size = 3, var.axes = var_axes_value, varname.size = input$varname_size, varname.adjust = input$varname_adjust,
+               varname.abbrev = varname_abbrev_value) +
+        scale_colour_manual(values = c(input$color1, input$color2, input$color3)) +
+        theme(legend.direction = "horizontal", legend.position = "top")
+    })
+  
+  output$downloadPlot2 = downloadHandler(
+    filename = "pca2.png",
+    content = function(file) {
+      png(file, width = 1000)
+      #scale
+      if (input$scale_2 == 1) {
+        scale_value_2 <-TRUE
+      } else if (input$scale_2 == 2) {
+        scale_value_2 <-FALSE
+      } else {
+        scale_value_2 <-FALSE
+      }
+      #var.axes
+      if (input$var_axes == 1) {
+        var_axes_value <-TRUE
+      } else if (input$var_axes == 2) {
+        var_axes_value <-FALSE
+      } else {
+        var_axes_value <-FALSE
+      }
+      #varname.abbrev
+      if (input$varname_abbrev == 1) {
+        varname_abbrev_value <-TRUE
+      } else if (input$varname_abbrev == 2) {
+        varname_abbrev_value <-FALSE
+      } else {
+        varname_abbrev_value <-FALSE
+      }
+      
+      
+      compiled_iris2<-iris[,1:4]
+      compiled_iris2[1:50,] <- compiled_iris2[1:50,] + 1
+      compiled_iris2[51:100,] <- compiled_iris2[51:100,] + 2
+      compiled_iris2[101:150,] <- compiled_iris2[101:150,] + 3
+      compiled_iris2<- cbind(c(rep("setosa", 50),
+                               rep("versicolor", 50),
+                               rep("virginica", 50)),
+                             compiled_iris2)
+      colnames(compiled_iris2) <- c("Sepal.Length","Sepal.Width","Petal.Length","Petal.Width","Petal.Width")
+      
+      pca2 <- prcomp(iris[,1:4], scale = scale_value_2)
+      
+      ggbiplot(pcobj = pca2, choices = 1:2, obs.scale = 0.5, var.scale = 2,
+               groups = iris[, 5], ellipse = TRUE, ellipse.prob = input$ellipse_prob, alpha = input$alpha,
+               labels.size = 3, var.axes = var_axes_value, varname.size = input$varname_size, varname.adjust = input$varname_adjust,
+               varname.abbrev = varname_abbrev_value) +
+        scale_colour_manual(values = c(input$color1, input$color2, input$color3)) +
+        theme(legend.direction = "horizontal", legend.position = "top")
+      dev.off()
+    },
+    contentType = "image/png",
+    )
+})

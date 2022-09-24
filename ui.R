@@ -1,0 +1,104 @@
+out_plot2d <-plotOutput(outputId = "plot2d")
+
+shinyUI(fluidPage(
+  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
+            tags$link(rel = "shortcut icon", href = "RStudio.ico"),
+            tags$title("PCA")),
+  div(
+    id="div-img",
+    img(id="img", src = "shiny_PCA.webp")
+  ),
+  div(id="space"),
+  h1("Principal Component Analysis"),
+  h2("~iris version~"),
+  #scale
+  selectInput("scale", label = h3("scale"), 
+              choices = list("TRUE" = 1, "FALSE" = 2),
+              selected = 2),
+  #ellipse.ci
+  sliderInput("ellipse_ci", label = h3("ellipse.ci"),
+              min = 0, max = 1, value = 0.9),
+  #fancy
+  selectInput("fancy", label = h3("fancy"), 
+              choices = list("TRUE" = 1, "FALSE" = 2),
+              selected = 1),
+  #bg
+  selectInput("bg", label = h3("bg"), 
+              choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
+                             "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7, "grey" = 8),
+              selected = 0),
+  #col
+  selectInput("col", label = h3("col"), 
+              choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
+                             "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
+                             "grey" = 8, "standard" = 9),
+              selected = 9),
+  #radius
+  selectInput("radius", label = h3("radius"), 
+              choices = list("0.750" = 0.750, "0.875" = 0.875, "1" = 1, "1.17" = 1.17,
+                             "1.33" = 1.33, "1.50" = 1.50, "1.67" = 1.67, "1.83" = 1.83,
+                             "2.00" = 2.00, "2.33" = 2.33),
+              selected = 1),
+  #legend
+  selectInput("legend", label = h3("legend"), 
+              choices = list("topleft" = 0, "topright" = 1, "top" = 2, "bottomleft" = 3,
+                             "bottomright" = 4, "bottom" = 5, "NULL" = 6),
+              selected = 0),
+  #plot
+  div(
+    plotOutput("plot2d_1")
+  ),
+  #Download
+  downloadButton('downloadPlot', label = 'Download PCA graph'),
+  ########################################################################################
+  #scale
+  selectInput("scale_2", label = h3("scale"), 
+              choices = list("TRUE" = 1, "FALSE" = 2),
+              selected = 2),
+  #ellipse.prob
+  sliderInput("ellipse_prob", label = h3("ellipse.prob"),
+              min = 0, max = 1, value = 0.9),
+  #alpha
+  sliderInput("alpha", label = h3("alpha"),
+              min = 0, max = 1, value = 1),
+  #var.axes
+  selectInput("var_axes", label = h3("var.axes"), 
+              choices = list("TRUE" = 1, "FALSE" = 2),
+              selected = 1),
+  #varname.size
+  sliderInput("varname_size", label = h3("varname.size"),
+              min = 0, max = 10, value = 3),
+  #varname.adjust
+  sliderInput("varname_adjust", label = h3("varname.adjust"),
+              min = 0, max = 3, value = 1),
+  #varname.abbrev
+  selectInput("varname_abbrev", label = h3("varname.abbrev"), 
+              choices = list("TRUE" = 1, "FALSE" = 2),
+              selected = 2),
+  #color1
+  selectInput("color1", label = h3("color1"), 
+              choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
+                             "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
+                             "grey" = 8),
+              selected = 2),
+  #color2
+  selectInput("color2", label = h3("color2"), 
+              choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
+              "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
+              "grey" = 8),
+              selected = 3),
+  #color3
+  selectInput("color3", label = h3("color3"), 
+              choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
+                             "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
+                             "grey" = 8),
+              selected = 6),
+  #plot
+  div(
+    plotOutput("plot2d_2")
+  ),
+  
+  #Download
+  downloadButton('downloadPlot2', label = 'Download PCA graph 2')
+))
+

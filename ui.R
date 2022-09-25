@@ -4,13 +4,26 @@ shinyUI(fluidPage(
   tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
             tags$link(rel = "shortcut icon", href = "RStudio.ico"),
             tags$title("PCA")),
-  div(
-    id="div-img",
-    img(id="img", src = "shiny_PCA.webp")
-  ),
-  div(id="space"),
   h1("Principal Component Analysis"),
-  h2("~iris version~"),
+  #file input
+  fileInput(inputId = "file1", label = "CSVファイルを選んでください",
+            accept = c("text/csv")
+            ,multiple = FALSE
+            ,width = "80%"
+            ,buttonLabel = "ホルダーを開く"
+            ,placeholder = "ファイルが選択されていません"
+  ),
+  #number
+  numericInput("column_start", 
+               label = h3("start column"), 
+               value = 2),
+  numericInput("column_end", 
+               label = h3("end column"), 
+               value = 3),
+  #label
+  numericInput("label", 
+               label = h3("label"), 
+               value = 1),
   #scale
   selectInput("scale", label = h3("scale"), 
               choices = list("TRUE" = 1, "FALSE" = 2),
@@ -49,7 +62,14 @@ shinyUI(fluidPage(
     plotOutput("plot2d_1")
   ),
   #Download
-  downloadButton('downloadPlot', label = 'Download PCA graph'),
+  downloadButton('downloadPlot', label = 'Download PCA graph 1'),
+  #summary
+  h3("summary"),
+  verbatimTextOutput("summary_1"), 
+  #round
+  h3("round"),
+  verbatimTextOutput("round_1"), 
+  
   ########################################################################################
   #scale
   selectInput("scale_2", label = h3("scale"), 
@@ -75,6 +95,34 @@ shinyUI(fluidPage(
   selectInput("varname_abbrev", label = h3("varname.abbrev"), 
               choices = list("TRUE" = 1, "FALSE" = 2),
               selected = 2),
+  #number1
+  numericInput("column_start1", 
+               label = h3("start column"), 
+               value = 1),
+  numericInput("column_end1", 
+               label = h3("end column"), 
+               value = 2),
+  #number2
+  numericInput("column_start2", 
+               label = h3("start column"), 
+               value = 3),
+  numericInput("column_end2", 
+               label = h3("end column"), 
+               value = 4),
+  #number3
+  numericInput("column_start3", 
+               label = h3("start column"), 
+               value = 5),
+  numericInput("column_end3", 
+               label = h3("end column"), 
+               value = 6),
+  #number4
+  numericInput("column_start4", 
+               label = h3("start column"), 
+               value = 7),
+  numericInput("column_end4", 
+               label = h3("end column"), 
+               value = 8),
   #color1
   selectInput("color1", label = h3("color1"), 
               choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
@@ -84,8 +132,8 @@ shinyUI(fluidPage(
   #color2
   selectInput("color2", label = h3("color2"), 
               choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
-              "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
-              "grey" = 8),
+                             "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
+                             "grey" = 8),
               selected = 3),
   #color3
   selectInput("color3", label = h3("color3"), 
@@ -93,12 +141,31 @@ shinyUI(fluidPage(
                              "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
                              "grey" = 8),
               selected = 6),
+  #color4
+  selectInput("color4", label = h3("color4"), 
+              choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
+                             "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
+                             "grey" = 8),
+              selected = 4),
+  #component 1
+  textInput("component1",label=h3("component1")),
+  #component 2
+  textInput("component2",label=h3("component2")),
+  #component 3
+  textInput("component3",label=h3("component3")),
+  #component 4
+  textInput("component4",label=h3("component4")),
   #plot
   div(
     plotOutput("plot2d_2")
   ),
-  
   #Download
-  downloadButton('downloadPlot2', label = 'Download PCA graph 2')
+  downloadButton('downloadPlot2', label = 'Download PCA graph 2'),
+  #summary
+  h3("summary"),
+  verbatimTextOutput("summary_2"), 
+  #round
+  h3("round"),
+  verbatimTextOutput("round_2"),
 ))
 

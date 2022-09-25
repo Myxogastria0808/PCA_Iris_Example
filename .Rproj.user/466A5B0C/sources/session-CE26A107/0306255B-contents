@@ -1,5 +1,0 @@
-library(shiny)
-library(rgl)
-library(pca3d)
-library(devtools)
-library(ggbiplot)

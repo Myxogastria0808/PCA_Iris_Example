@@ -5,9 +5,9 @@ account: pcaplot
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7076736
-bundleId: 6335337
+bundleId: 6338394
 url: https://pcaplot.shinyapps.io/PCA_macker/
-when: 1664091488.30968
-lastSyncTime: 1664091488.30971
+when: 1664191131.85653
+lastSyncTime: 1664191131.85655
 asMultiple: FALSE
 asStatic: FALSE

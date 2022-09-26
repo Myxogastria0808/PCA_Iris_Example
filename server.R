@@ -106,12 +106,6 @@ shinyServer(function(input, output) {
           radius = radius_value,
           legend = legend_value
     )
-    output$summary_1 <- renderPrint({
-      summary(pca)
-    })
-    output$round_1 <- renderPrint({
-      round(pca$rotation, 4)
-    })
   }
   
   plotInput2 <- function() {
@@ -183,7 +177,202 @@ shinyServer(function(input, output) {
     },
     contentType = "image/png",
   )
-  
+  #######################################################################
+  output$summary_1 <- renderPrint({
+    #scale
+    if (input$scale == 1) {
+      scale_value <-TRUE
+    } else if (input$scale == 2) {
+      scale_value <-FALSE
+    } else {
+      scale_value <-FALSE
+    }
+    
+    #fancy
+    if (input$fancy == 1) {
+      fancy_value <-TRUE
+    } else if (input$fancy == 2) {
+      fancy_value <-FALSE
+    } else {
+      fancy_value <-FALSE
+    }
+    
+    #col
+    if (input$col == 0) {
+      col_value <-0
+    } else if (input$col == 1) {
+      col_value <-1
+    } else if (input$col == 2) {
+      col_value <-2
+    } else if (input$col == 3) {
+      col_value <-3
+    } else if (input$col == 4) {
+      col_value <-4
+    } else if (input$col == 5) {
+      col_value <-5
+    } else if (input$col == 6) {
+      col_value <-6
+    } else if (input$col == 7) {
+      col_value <-7
+    } else if (input$col == 8) {
+      col_value <-8
+    } else if (input$col == 9) {
+      col_value <-NULL
+    } else {
+      col_value <-NULL
+    }
+    
+    #radius
+    if (input$radius == 0.750) {
+      radius_value <-0.750
+    } else if (input$radius == 0.875) {
+      radius_value <-0.875
+    } else if (input$radius == 1) {
+      radius_value <-1
+    } else if (input$radius == 1.17) {
+      radius_value <-1.17
+    } else if (input$radius == 1.33) {
+      radius_value <-1.33
+    } else if (input$radius == 1.50) {
+      radius_value <-1.50
+    } else if (input$radius == 1.67) {
+      radius_value <-1.67
+    } else if (input$radius == 1.83) {
+      radius_value <-1.83
+    } else if (input$radius == 2.00) {
+      radius_value <-2.00
+    } else if (input$radius == 2.33) {
+      radius_value <-2.33
+    } else {
+      radius <-1
+    }
+    
+    #legend
+    if (input$legend == 0) {
+      legend_value <-"topleft"
+    } else if (input$legend == 1) {
+      legend_value <-"topright"
+    } else if (input$legend == 2) {
+      legend_value <-"top"
+    } else if (input$legend == 3) {
+      legend_value <-"bottomleft"
+    } else if (input$legend == 4) {
+      legend_value <-"bottomright"
+    } else if (input$legend == 5) {
+      legend_value <-"bottom"
+    } else if (input$legend == 6) {
+      legend_value <-NULL
+    } else {
+      legend_value <-"topleft"
+    }
+    
+    #　csvファイルのテーブル読み込み
+    inFile <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
+    inFile <-inFile()[]
+    
+    inFile=data.frame("inFile"= inFile)
+    compiled_inFile<-inFile[input$column_start:input$column_end]
+    pca <-prcomp(compiled_inFile, scale= scale_value)
+    summary(pca)
+  })
+  output$round_1 <- renderPrint({
+    #scale
+    if (input$scale == 1) {
+      scale_value <-TRUE
+    } else if (input$scale == 2) {
+      scale_value <-FALSE
+    } else {
+      scale_value <-FALSE
+    }
+    
+    #fancy
+    if (input$fancy == 1) {
+      fancy_value <-TRUE
+    } else if (input$fancy == 2) {
+      fancy_value <-FALSE
+    } else {
+      fancy_value <-FALSE
+    }
+    
+    #col
+    if (input$col == 0) {
+      col_value <-0
+    } else if (input$col == 1) {
+      col_value <-1
+    } else if (input$col == 2) {
+      col_value <-2
+    } else if (input$col == 3) {
+      col_value <-3
+    } else if (input$col == 4) {
+      col_value <-4
+    } else if (input$col == 5) {
+      col_value <-5
+    } else if (input$col == 6) {
+      col_value <-6
+    } else if (input$col == 7) {
+      col_value <-7
+    } else if (input$col == 8) {
+      col_value <-8
+    } else if (input$col == 9) {
+      col_value <-NULL
+    } else {
+      col_value <-NULL
+    }
+    
+    #radius
+    if (input$radius == 0.750) {
+      radius_value <-0.750
+    } else if (input$radius == 0.875) {
+      radius_value <-0.875
+    } else if (input$radius == 1) {
+      radius_value <-1
+    } else if (input$radius == 1.17) {
+      radius_value <-1.17
+    } else if (input$radius == 1.33) {
+      radius_value <-1.33
+    } else if (input$radius == 1.50) {
+      radius_value <-1.50
+    } else if (input$radius == 1.67) {
+      radius_value <-1.67
+    } else if (input$radius == 1.83) {
+      radius_value <-1.83
+    } else if (input$radius == 2.00) {
+      radius_value <-2.00
+    } else if (input$radius == 2.33) {
+      radius_value <-2.33
+    } else {
+      radius <-1
+    }
+    
+    #legend
+    if (input$legend == 0) {
+      legend_value <-"topleft"
+    } else if (input$legend == 1) {
+      legend_value <-"topright"
+    } else if (input$legend == 2) {
+      legend_value <-"top"
+    } else if (input$legend == 3) {
+      legend_value <-"bottomleft"
+    } else if (input$legend == 4) {
+      legend_value <-"bottomright"
+    } else if (input$legend == 5) {
+      legend_value <-"bottom"
+    } else if (input$legend == 6) {
+      legend_value <-NULL
+    } else {
+      legend_value <-"topleft"
+    }
+    
+    #　csvファイルのテーブル読み込み
+    inFile <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
+    inFile <-inFile()[]
+    
+    inFile=data.frame("inFile"= inFile)
+    compiled_inFile<-inFile[input$column_start:input$column_end]
+    pca <-prcomp(compiled_inFile, scale= scale_value)
+    round(pca$rotation, 4)
+  })
+  ##################################################################
   output$plot2d_2 <- renderPlot ({
     plotInput2()
   })
@@ -245,7 +434,7 @@ shinyServer(function(input, output) {
                     inFile1)
     
     pca2 <- prcomp(inFile1[, input$column_start:input$column_end], scale = scale_value_2)
-    summary(pca)
+    summary(pca2)
   })
   
   output$round_2 <- renderPrint({
@@ -295,6 +484,6 @@ shinyServer(function(input, output) {
                     inFile1)
 
     pca2 <- prcomp(inFile1[, input$column_start:input$column_end], scale = scale_value_2)
-    round(pca$rotation, 4)
+    round(pca2$rotation, 4)
   })
 })

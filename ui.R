@@ -4,168 +4,179 @@ shinyUI(fluidPage(
   tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
             tags$link(rel = "shortcut icon", href = "RStudio.ico"),
             tags$title("PCA")),
-  h1("Principal Component Analysis"),
-  #file input
-  fileInput(inputId = "file1", label = "CSVファイルを選んでください",
-            accept = c("text/csv")
-            ,multiple = FALSE
-            ,width = "80%"
-            ,buttonLabel = "ホルダーを開く"
-            ,placeholder = "ファイルが選択されていません"
-  ),
-  #number
-  numericInput("column_start", 
-               label = h3("start column"), 
-               value = 2),
-  numericInput("column_end", 
-               label = h3("end column"), 
-               value = 3),
-  #label
-  numericInput("label", 
-               label = h3("label"), 
-               value = 1),
-  #scale
-  selectInput("scale", label = h3("scale"), 
-              choices = list("TRUE" = 1, "FALSE" = 2),
-              selected = 2),
-  #ellipse.ci
-  sliderInput("ellipse_ci", label = h3("ellipse.ci"),
-              min = 0, max = 1, value = 0.9),
-  #fancy
-  selectInput("fancy", label = h3("fancy"), 
-              choices = list("TRUE" = 1, "FALSE" = 2),
-              selected = 1),
-  #bg
-  selectInput("bg", label = h3("bg"), 
-              choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
-                             "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7, "grey" = 8),
-              selected = 0),
-  #col
-  selectInput("col", label = h3("col"), 
-              choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
-                             "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
-                             "grey" = 8, "standard" = 9),
-              selected = 9),
-  #radius
-  selectInput("radius", label = h3("radius"), 
-              choices = list("0.750" = 0.750, "0.875" = 0.875, "1" = 1, "1.17" = 1.17,
-                             "1.33" = 1.33, "1.50" = 1.50, "1.67" = 1.67, "1.83" = 1.83,
-                             "2.00" = 2.00, "2.33" = 2.33),
-              selected = 1),
-  #legend
-  selectInput("legend", label = h3("legend"), 
-              choices = list("topleft" = 0, "topright" = 1, "top" = 2, "bottomleft" = 3,
-                             "bottomright" = 4, "bottom" = 5, "NULL" = 6),
-              selected = 0),
-  #plot
-  div(
-    plotOutput("plot2d_1")
-  ),
-  #Download
-  downloadButton('downloadPlot', label = 'Download PCA graph 1'),
-  #summary
-  h3("summary"),
-  verbatimTextOutput("summary_1"), 
-  #round
-  h3("round"),
-  verbatimTextOutput("round_1"), 
-  
-  ########################################################################################
-  #scale
-  selectInput("scale_2", label = h3("scale"), 
-              choices = list("TRUE" = 1, "FALSE" = 2),
-              selected = 2),
-  #ellipse.prob
-  sliderInput("ellipse_prob", label = h3("ellipse.prob"),
-              min = 0, max = 1, value = 0.9),
-  #alpha
-  sliderInput("alpha", label = h3("alpha"),
-              min = 0, max = 1, value = 1),
-  #var.axes
-  selectInput("var_axes", label = h3("var.axes"), 
-              choices = list("TRUE" = 1, "FALSE" = 2),
-              selected = 1),
-  #varname.size
-  sliderInput("varname_size", label = h3("varname.size"),
-              min = 0, max = 10, value = 3),
-  #varname.adjust
-  sliderInput("varname_adjust", label = h3("varname.adjust"),
-              min = 0, max = 3, value = 1),
-  #varname.abbrev
-  selectInput("varname_abbrev", label = h3("varname.abbrev"), 
-              choices = list("TRUE" = 1, "FALSE" = 2),
-              selected = 2),
-  #number1
-  numericInput("column_start1", 
-               label = h3("start column"), 
-               value = 1),
-  numericInput("column_end1", 
-               label = h3("end column"), 
-               value = 2),
-  #number2
-  numericInput("column_start2", 
-               label = h3("start column"), 
-               value = 3),
-  numericInput("column_end2", 
-               label = h3("end column"), 
-               value = 4),
-  #number3
-  numericInput("column_start3", 
-               label = h3("start column"), 
-               value = 5),
-  numericInput("column_end3", 
-               label = h3("end column"), 
-               value = 6),
-  #number4
-  numericInput("column_start4", 
-               label = h3("start column"), 
-               value = 7),
-  numericInput("column_end4", 
-               label = h3("end column"), 
-               value = 8),
-  #color1
-  selectInput("color1", label = h3("color1"), 
-              choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
-                             "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
-                             "grey" = 8),
-              selected = 2),
-  #color2
-  selectInput("color2", label = h3("color2"), 
-              choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
-                             "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
-                             "grey" = 8),
-              selected = 3),
-  #color3
-  selectInput("color3", label = h3("color3"), 
-              choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
-                             "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
-                             "grey" = 8),
-              selected = 6),
-  #color4
-  selectInput("color4", label = h3("color4"), 
-              choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
-                             "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
-                             "grey" = 8),
-              selected = 4),
-  #component 1
-  textInput("component1",label=h3("component1")),
-  #component 2
-  textInput("component2",label=h3("component2")),
-  #component 3
-  textInput("component3",label=h3("component3")),
-  #component 4
-  textInput("component4",label=h3("component4")),
-  #plot
-  div(
-    plotOutput("plot2d_2")
-  ),
-  #Download
-  downloadButton('downloadPlot2', label = 'Download PCA graph 2'),
-  #summary
-  h3("summary"),
-  verbatimTextOutput("summary_2"), 
-  #round
-  h3("round"),
-  verbatimTextOutput("round_2"),
+      h1("Principal Component Analysis"),
+      #file input
+      fileInput(inputId = "file1", label = "Select a csv file",
+                accept = c("text/csv")
+                ,multiple = FALSE
+                ,width = "80%"
+                ,buttonLabel = "Open folder"
+                ,placeholder = "File not selected"
+      ),
+      fluidRow(
+        column(width=6,
+               #number
+               numericInput("column_start", 
+                            label = h3("start row"), 
+                            value = 2),
+               numericInput("column_end", 
+                            label = h3("end row"), 
+                            value = 3),
+               #label
+               numericInput("label", 
+                            label = h3("label"), 
+                            value = 1),
+               #scale
+               selectInput("scale", label = h3("scale"), 
+                           choices = list("TRUE" = 1, "FALSE" = 2),
+                           selected = 2),
+               #ellipse.ci
+               sliderInput("ellipse_ci", label = h3("ellipse.ci"),
+                           min = 0, max = 1, value = 0.9)
+        ),
+        column(width=6,
+               #fancy
+               selectInput("fancy", label = h3("fancy"), 
+                           choices = list("TRUE" = 1, "FALSE" = 2),
+                           selected = 1),
+               #bg
+               selectInput("bg", label = h3("bg"), 
+                           choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
+                                          "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7, "grey" = 8),
+                           selected = 0),
+               #col
+               selectInput("col", label = h3("col"), 
+                           choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
+                                          "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
+                                          "grey" = 8, "standard" = 9),
+                           selected = 9),
+               #radius
+               selectInput("radius", label = h3("radius"), 
+                           choices = list("0.750" = 0.750, "0.875" = 0.875, "1" = 1, "1.17" = 1.17,
+                                          "1.33" = 1.33, "1.50" = 1.50, "1.67" = 1.67, "1.83" = 1.83,
+                                          "2.00" = 2.00, "2.33" = 2.33),
+                           selected = 1),
+               #legend
+               selectInput("legend", label = h3("legend"), 
+                           choices = list("topleft" = 0, "topright" = 1, "top" = 2, "bottomleft" = 3,
+                                          "bottomright" = 4, "bottom" = 5, "NULL" = 6),
+                           selected = 0)
+        ),
+      ),
+      #plot
+      div(
+        plotOutput("plot2d_1")
+      ),
+      #Download
+      downloadButton('downloadPlot', label = 'Download PCA graph 1'),
+      #summary
+      h3("summary"),
+      verbatimTextOutput("summary_1"), 
+      #round
+      h3("round"),
+      verbatimTextOutput("round_1"), 
+      ########################################################################################
+      fluidRow(
+        column(width=6,
+               #scale
+               selectInput("scale_2", label = h3("scale"), 
+                           choices = list("TRUE" = 1, "FALSE" = 2),
+                           selected = 2),
+               #ellipse.prob
+               sliderInput("ellipse_prob", label = h3("ellipse.prob"),
+                           min = 0, max = 1, value = 0.9),
+               #alpha
+               sliderInput("alpha", label = h3("alpha"),
+                           min = 0, max = 1, value = 1),
+               #var.axes
+               selectInput("var_axes", label = h3("var.axes"), 
+                           choices = list("TRUE" = 1, "FALSE" = 2),
+                           selected = 1),
+               #varname.size
+               sliderInput("varname_size", label = h3("varname.size"),
+                           min = 0, max = 10, value = 3),
+               #varname.adjust
+               sliderInput("varname_adjust", label = h3("varname.adjust"),
+                           min = 0, max = 3, value = 1),
+               #varname.abbrev
+               selectInput("varname_abbrev", label = h3("varname.abbrev"), 
+                           choices = list("TRUE" = 1, "FALSE" = 2),
+                           selected = 2),
+               #color1
+               selectInput("color1", label = h3("color1"), 
+                           choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
+                                          "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
+                                          "grey" = 8),
+                           selected = 2),
+               #color2
+               selectInput("color2", label = h3("color2"), 
+                           choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
+                                          "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
+                                          "grey" = 8),
+                           selected = 3),
+               #color3
+               selectInput("color3", label = h3("color3"), 
+                           choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
+                                          "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
+                                          "grey" = 8),
+                           selected = 6),
+               #color4
+               selectInput("color4", label = h3("color4"), 
+                           choices = list("white" = 0, "black" = 1, "red" = 2, "green" = 3,
+                                          "blue" = 4, "cyan" = 5, "magenta" = 6, "yellow" = 7,
+                                          "grey" = 8),
+                           selected = 4)
+        ),
+        column(width=6,
+               #number1
+               numericInput("column_start1", 
+                            label = h3("start column"), 
+                            value = 1),
+               numericInput("column_end1", 
+                            label = h3("end column"), 
+                            value = 2),
+               #number2
+               numericInput("column_start2", 
+                            label = h3("start column"), 
+                            value = 3),
+               numericInput("column_end2", 
+                            label = h3("end column"), 
+                            value = 4),
+               #number3
+               numericInput("column_start3", 
+                            label = h3("start column"), 
+                            value = 5),
+               numericInput("column_end3", 
+                            label = h3("end column"), 
+                            value = 6),
+               #number4
+               numericInput("column_start4", 
+                            label = h3("start column"), 
+                            value = 7),
+               numericInput("column_end4", 
+                            label = h3("end column"), 
+                            value = 8),
+               #component 1
+               textInput("component1",label=h3("component1")),
+               #component 2
+               textInput("component2",label=h3("component2")),
+               #component 3
+               textInput("component3",label=h3("component3")),
+               #component 4
+               textInput("component4",label=h3("component4"))
+        ),
+      ),
+      #plot
+      div(
+        plotOutput("plot2d_2")
+      ),
+      #Download
+      downloadButton('downloadPlot2', label = 'Download PCA graph 2'),
+      #summary
+      h3("summary"),
+      verbatimTextOutput("summary_2"), 
+      #round
+      h3("round"),
+      verbatimTextOutput("round_2")
 ))
 

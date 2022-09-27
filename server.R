@@ -1,4 +1,5 @@
 shinyServer(function(input, output) {
+  inFile <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
   plotInput1 <- function() {
     #scale
     if (input$scale == 1) {
@@ -88,7 +89,7 @@ shinyServer(function(input, output) {
     }
     
     #　csvファイルのテーブル読み込み
-    inFile <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
+    #inFile <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
     inFile <-inFile()[]
     
     inFile=data.frame("inFile"= inFile)
@@ -135,29 +136,29 @@ shinyServer(function(input, output) {
     }
     #　csvファイルのテーブル読み込み
     #　csvファイルのテーブル読み込み
-    inFile1 <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
-    inFile1 <-inFile1()[]
-    inFile1=data.frame("inFile1"= inFile1)
-    inFile1<-inFile1[input$column_start:input$column_end]
-    inFile1[input$column_start1:input$column_end1,] <- inFile1[input$column_start1:input$column_end1,] + 1
-    inFile1[input$column_start2:input$column_end2,] <- inFile1[input$column_start2:input$column_end2,] + 2
-    inFile1[input$column_start3:input$column_end3,] <- inFile1[input$column_start3:input$column_end3,] + 3
-    inFile1[input$column_start4:input$column_end4,] <- inFile1[input$column_start4:input$column_end4,,] + 4
+    #inFile1 <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
+    inFile <-inFile()[]
+    inFile=data.frame("inFile"= inFile)
+    inFile<-inFile[input$column_start:input$column_end]
+    inFile[input$column_start1:input$column_end1,] <- inFile[input$column_start1:input$column_end1,] + 1
+    inFile[input$column_start2:input$column_end2,] <- inFile[input$column_start2:input$column_end2,] + 2
+    inFile[input$column_start3:input$column_end3,] <- inFile[input$column_start3:input$column_end3,] + 3
+    inFile[input$column_start4:input$column_end4,] <- inFile[input$column_start4:input$column_end4,,] + 4
     
     component_number2 <- input$column_end2 - input$column_end1
     component_number3 <- input$column_end3 - input$column_end2
     component_number4 <- input$column_end4 - input$column_end3
     
-    inFile1<- cbind(c(rep(input$component1, input$column_end1),
-                      rep(input$component2, component_number2),
-                      rep(input$component3, component_number3),
-                      rep(input$component4, component_number4)),
-                    inFile1)
-    #colnames(inFile1) <- c("types","L1","L2","L3","L4","L1/L2","L1/L4" )
-    pca2 <- prcomp(inFile1[, input$column_start:input$column_end], scale = scale_value_2)
+    inFile<- cbind(c(rep(input$component1, input$column_end1),
+                     rep(input$component2, component_number2),
+                     rep(input$component3, component_number3),
+                     rep(input$component4, component_number4)),
+                   inFile)
+    
+    pca2 <- prcomp(inFile[, input$column_start:input$column_end], scale = scale_value_2)
     
     ggbiplot(pcobj = pca2, choices = 1:2, obs.scale = 0.5, var.scale = 2,
-             groups = inFile1[, input$label], ellipse = TRUE, ellipse.prob = input$ellipse_prob, alpha = input$alpha,
+             groups = inFile[, input$label], ellipse = TRUE, ellipse.prob = input$ellipse_prob, alpha = input$alpha,
              labels.size = 3, var.axes = var_axes_value, varname.size = input$varname_size, varname.adjust = input$varname_adjust,
              varname.abbrev = varname_abbrev_value) +
       scale_colour_manual(values = c(input$color1, input$color2, input$color3, input$color4)) +
@@ -267,7 +268,6 @@ shinyServer(function(input, output) {
     }
     
     #　csvファイルのテーブル読み込み
-    inFile <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
     inFile <-inFile()[]
     
     inFile=data.frame("inFile"= inFile)
@@ -364,7 +364,6 @@ shinyServer(function(input, output) {
     }
     
     #　csvファイルのテーブル読み込み
-    inFile <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
     inFile <-inFile()[]
     
     inFile=data.frame("inFile"= inFile)
@@ -414,29 +413,30 @@ shinyServer(function(input, output) {
     }
     #　csvファイルのテーブル読み込み
     #　csvファイルのテーブル読み込み
-    inFile1 <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
-    inFile1 <-inFile1()[]
-    inFile1=data.frame("inFile1"= inFile1)
-    inFile1<-inFile1[input$column_start:input$column_end]
-    inFile1[input$column_start1:input$column_end1,] <- inFile1[input$column_start1:input$column_end1,] + 1
-    inFile1[input$column_start2:input$column_end2,] <- inFile1[input$column_start2:input$column_end2,] + 2
-    inFile1[input$column_start3:input$column_end3,] <- inFile1[input$column_start3:input$column_end3,] + 3
-    inFile1[input$column_start4:input$column_end4,] <- inFile1[input$column_start4:input$column_end4,,] + 4
+    #inFile1 <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
+    inFile <-inFile()[]
+    inFile=data.frame("inFile"= inFile)
+    inFile<-inFile[input$column_start:input$column_end]
+    inFile[input$column_start1:input$column_end1,] <- inFile[input$column_start1:input$column_end1,] + 1
+    inFile[input$column_start2:input$column_end2,] <- inFile[input$column_start2:input$column_end2,] + 2
+    inFile[input$column_start3:input$column_end3,] <- inFile[input$column_start3:input$column_end3,] + 3
+    inFile[input$column_start4:input$column_end4,] <- inFile[input$column_start4:input$column_end4,,] + 4
     
     component_number2 <- input$column_end2 - input$column_end1
     component_number3 <- input$column_end3 - input$column_end2
     component_number4 <- input$column_end4 - input$column_end3
     
-    inFile1<- cbind(c(rep(input$component1, input$column_end1),
-                      rep(input$component2, component_number2),
-                      rep(input$component3, component_number3),
-                      rep(input$component4, component_number4)),
-                    inFile1)
+    inFile<- cbind(c(rep(input$component1, input$column_end1),
+                     rep(input$component2, component_number2),
+                     rep(input$component3, component_number3),
+                     rep(input$component4, component_number4)),
+                   inFile)
     
-    pca2 <- prcomp(inFile1[, input$column_start:input$column_end], scale = scale_value_2)
+    pca2 <- prcomp(inFile[, input$column_start:input$column_end], scale = scale_value_2)
     summary(pca2)
   })
   
+  #inFile1 <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ',')))
   output$round_2 <- renderPrint({
     #scale
     if (input$scale_2 == 1) {
@@ -464,26 +464,26 @@ shinyServer(function(input, output) {
     }
     #　csvファイルのテーブル読み込み
     #　csvファイルのテーブル読み込み
-    inFile1 <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
-    inFile1 <-inFile1()[]
-    inFile1=data.frame("inFile1"= inFile1)
-    inFile1<-inFile1[input$column_start:input$column_end]
-    inFile1[input$column_start1:input$column_end1,] <- inFile1[input$column_start1:input$column_end1,] + 1
-    inFile1[input$column_start2:input$column_end2,] <- inFile1[input$column_start2:input$column_end2,] + 2
-    inFile1[input$column_start3:input$column_end3,] <- inFile1[input$column_start3:input$column_end3,] + 3
-    inFile1[input$column_start4:input$column_end4,] <- inFile1[input$column_start4:input$column_end4,,] + 4
+    #inFile1 <- reactive(read.csv(input$file1$datapath, header=TRUE, sep = ','))
+    inFile <-inFile()[]
+    inFile=data.frame("inFile"= inFile)
+    inFile<-inFile[input$column_start:input$column_end]
+    inFile[input$column_start1:input$column_end1,] <- inFile[input$column_start1:input$column_end1,] + 1
+    inFile[input$column_start2:input$column_end2,] <- inFile[input$column_start2:input$column_end2,] + 2
+    inFile[input$column_start3:input$column_end3,] <- inFile[input$column_start3:input$column_end3,] + 3
+    inFile[input$column_start4:input$column_end4,] <- inFile[input$column_start4:input$column_end4,,] + 4
     
     component_number2 <- input$column_end2 - input$column_end1
     component_number3 <- input$column_end3 - input$column_end2
     component_number4 <- input$column_end4 - input$column_end3
     
-    inFile1<- cbind(c(rep(input$component1, input$column_end1),
+    inFile<- cbind(c(rep(input$component1, input$column_end1),
                       rep(input$component2, component_number2),
                       rep(input$component3, component_number3),
                       rep(input$component4, component_number4)),
-                    inFile1)
+                    inFile)
 
-    pca2 <- prcomp(inFile1[, input$column_start:input$column_end], scale = scale_value_2)
+    pca2 <- prcomp(inFile[, input$column_start:input$column_end], scale = scale_value_2)
     round(pca2$rotation, 4)
   })
 })

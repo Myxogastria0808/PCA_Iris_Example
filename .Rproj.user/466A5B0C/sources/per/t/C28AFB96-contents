@@ -1,0 +1,14 @@
+h1 {
+  text-align: center;
+  color: blue;
+}
+h2 {
+  text-align: center;
+  color: blue;
+}
+div {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1200px;
+  text-align: center;
+}
